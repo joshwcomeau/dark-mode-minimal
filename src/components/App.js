@@ -3,12 +3,12 @@ import React from 'react';
 import { ThemeProvider } from './ThemeContext';
 import GlobalStyles from './GlobalStyles';
 
-import './style.css';
+// import './style.css';
 
 function App({ children }) {
   return (
     <ThemeProvider>
-      {/* <GlobalStyles /> */}
+      <GlobalStyles />
       {children}
     </ThemeProvider>
   );
