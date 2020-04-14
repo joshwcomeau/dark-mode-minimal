@@ -1,6 +1,5 @@
 import React from 'react';
 import Terser from 'terser';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 import {
   PREFERS_DARK_KEY,
@@ -56,28 +55,14 @@ const ThemeHydrationScriptTag = () => {
   return <script dangerouslySetInnerHTML={{ __html: calledFunction }} />;
 };
 
-const sheetByPathname = new Map();
-
 export const onRenderBody = ({
   setHeadComponents,
   pathname,
   setPreBodyComponents,
 }) => {
-  const sheet = sheetByPathname.get(pathname);
-  if (sheet) {
-    setHeadComponents([sheet.getStyleElement()]);
-    sheetByPathname.delete(pathname);
-  }
-
   setPreBodyComponents(<ThemeHydrationScriptTag />);
 };
 
 export const wrapRootElement = ({ element, pathname }) => {
-  const sheet = new ServerStyleSheet();
-  sheetByPathname.set(pathname, sheet);
-  return (
-    <App>
-      <StyleSheetManager sheet={sheet.instance}>{element}</StyleSheetManager>
-    </App>
-  );
+  return <App>{element}</App>;
 };
