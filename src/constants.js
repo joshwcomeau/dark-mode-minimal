@@ -1,5 +1,4 @@
 export const COLORS = {
-  // near-black
   text: {
     light: 'hsl(0deg, 0%, 10%)', // white
     dark: 'hsl(0deg, 0%, 100%)', // near-black
@@ -9,11 +8,11 @@ export const COLORS = {
     dark: 'hsl(250deg, 70%, 7%)', // navy navy blue
   },
   primary: {
-    light: 'hsl(250deg, 100%, 50%)', // Purplish-blue
+    light: 'hsl(340deg, 100%, 40%)', // Pinkish-red
     dark: 'hsl(50deg, 100%, 50%)', // Yellow
   },
   secondary: {
-    light: 'hsl(340deg, 100%, 40%)', // Pinkish-red
+    light: 'hsl(250deg, 100%, 50%)', // Purplish-blue
     dark: 'hsl(190deg, 100%, 40%)', // Cyan
   },
   // Grays, scaling from least-noticeable to most-noticeable

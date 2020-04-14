@@ -33,8 +33,6 @@ export const ThemeProvider = ({ children }) => {
       Object.entries(COLORS).forEach(([name, colorByTheme]) => {
         const cssVarName = `--color-${name}`;
 
-        console.log('Setting', cssVarName, colorByTheme, isDark);
-
         root.style.setProperty(
           cssVarName,
           isDark ? colorByTheme.dark : colorByTheme.light
