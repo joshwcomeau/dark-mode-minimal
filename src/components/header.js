@@ -1,42 +1,35 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import React from 'react';
+import { Link } from 'gatsby';
+import styled from 'styled-components';
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+import { ThemeContext } from './ThemeContext';
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+const Header = ({ siteTitle }) => {
+  const { colorMode, setColorMode } = React.useContext(ThemeContext);
 
-Header.defaultProps = {
-  siteTitle: ``,
-}
+  return (
+    <Wrapper>
+      My Website
+      {typeof colorMode !== 'undefined' && (
+        <label>
+          <input
+            type="checkbox"
+            checked={colorMode === 'dark'}
+            onChange={ev => {
+              setColorMode(ev.target.checked ? 'dark' : 'light');
+            }}
+          />{' '}
+          Dark
+        </label>
+      )}
+    </Wrapper>
+  );
+};
 
-export default Header
+const Wrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+`;
+
+export default Header;
