@@ -76,8 +76,8 @@ export const wrapRootElement = ({ element, pathname }) => {
   const sheet = new ServerStyleSheet();
   sheetByPathname.set(pathname, sheet);
   return (
-    <App>
-      <StyleSheetManager sheet={sheet.instance}>{element}</StyleSheetManager>
-    </App>
+    <StyleSheetManager sheet={sheet.instance}>
+      <App>{element}</App>
+    </StyleSheetManager>
   );
 };
