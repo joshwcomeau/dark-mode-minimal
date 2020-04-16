@@ -1,27 +1,15 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import { ThemeContext } from './ThemeContext';
 
-const Header = ({ siteTitle }) => {
-  const { colorMode, setColorMode } = React.useContext(ThemeContext);
+import DarkToggle from './DarkToggle';
 
+const Header = ({ siteTitle }) => {
   return (
     <Wrapper>
-      My Website
-      {typeof colorMode !== 'undefined' && (
-        <label>
-          <input
-            type="checkbox"
-            checked={colorMode === 'dark'}
-            onChange={ev => {
-              setColorMode(ev.target.checked ? 'dark' : 'light');
-            }}
-          />{' '}
-          Dark
-        </label>
-      )}
+      {siteTitle}
+      <DarkToggle />
     </Wrapper>
   );
 };

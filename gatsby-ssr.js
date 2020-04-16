@@ -2,54 +2,52 @@ import React from 'react';
 import Terser from 'terser';
 
 import {
-  PREFERS_DARK_KEY,
+  COLOR_MODE_KEY,
   COLORS,
-  PREFERS_DARK_CSS_PROP,
+  INITIAL_COLOR_MODE_CSS_PROP,
 } from './src/constants';
 
 import App from './src/components/App';
 
 function setColorsByTheme() {
   const colors = '🌈';
-  const prefersDarkKey = '🔑';
-  const prefersDarkCssProp = '⚡️';
+  const colorModeKey = '🔑';
+  const colorModeCssProp = '⚡️';
 
   const mql = window.matchMedia('(prefers-color-scheme: dark)');
   const prefersDarkFromMQ = mql.matches;
-  const prefersDarkFromLocalStorage = localStorage.getItem(prefersDarkKey);
+  const prefersDarkFromLocalStorage = localStorage.getItem(colorModeKey);
 
-  let isDark;
+  let colorMode = 'light';
 
   const hasUsedToggle = typeof prefersDarkFromLocalStorage === 'string';
 
   if (hasUsedToggle) {
-    isDark = prefersDarkFromLocalStorage === 'true';
+    colorMode = prefersDarkFromLocalStorage;
   } else {
-    isDark = prefersDarkFromMQ;
+    colorMode = prefersDarkFromMQ ? 'dark' : 'light';
   }
 
   let root = document.documentElement;
 
-  root.style.setProperty(prefersDarkCssProp, isDark);
+  root.style.setProperty(colorModeCssProp, colorMode);
 
   Object.entries(colors).forEach(([name, colorByTheme]) => {
     const cssVarName = `--color-${name}`;
 
-    root.style.setProperty(
-      cssVarName,
-      isDark ? colorByTheme.dark : colorByTheme.light
-    );
+    root.style.setProperty(cssVarName, colorByTheme[colorMode]);
   });
 }
 
 const ThemeHydrationScriptTag = () => {
   const boundFn = String(setColorsByTheme)
     .replace("'🌈'", JSON.stringify(COLORS))
-    .replace('🔑', PREFERS_DARK_KEY)
-    .replace('⚡️', PREFERS_DARK_CSS_PROP);
+    .replace('🔑', COLOR_MODE_KEY)
+    .replace('⚡️', INITIAL_COLOR_MODE_CSS_PROP);
 
-  const calledFunction = `(${boundFn})()`;
-  // injectedScriptContents = Terser.minify(injectedScriptContents).code;
+  let calledFunction = `(${boundFn})()`;
+
+  calledFunction = Terser.minify(calledFunction).code;
 
   // eslint-disable-next-line react/no-danger
   return <script dangerouslySetInnerHTML={{ __html: calledFunction }} />;
