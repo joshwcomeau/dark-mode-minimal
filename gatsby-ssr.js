@@ -39,7 +39,7 @@ function setColorsByTheme() {
   });
 }
 
-const ThemeHydrationScriptTag = () => {
+const MagicScriptTag = () => {
   const boundFn = String(setColorsByTheme)
     .replace("'🌈'", JSON.stringify(COLORS))
     .replace('🔑', COLOR_MODE_KEY)
@@ -54,7 +54,7 @@ const ThemeHydrationScriptTag = () => {
 };
 
 export const onRenderBody = ({ setPreBodyComponents }) => {
-  setPreBodyComponents(<ThemeHydrationScriptTag />);
+  setPreBodyComponents(<MagicScriptTag />);
 };
 
 export const wrapPageElement = ({ element }) => {
