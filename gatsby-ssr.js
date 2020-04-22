@@ -16,14 +16,14 @@ function setColorsByTheme() {
 
   const mql = window.matchMedia('(prefers-color-scheme: dark)');
   const prefersDarkFromMQ = mql.matches;
-  const prefersDarkFromLocalStorage = localStorage.getItem(colorModeKey);
+  const persistedPreference = localStorage.getItem(colorModeKey);
 
   let colorMode = 'light';
 
-  const hasUsedToggle = typeof prefersDarkFromLocalStorage === 'string';
+  const hasUsedToggle = typeof persistedPreference === 'string';
 
   if (hasUsedToggle) {
-    colorMode = prefersDarkFromLocalStorage;
+    colorMode = persistedPreference;
   } else {
     colorMode = prefersDarkFromMQ ? 'dark' : 'light';
   }
@@ -53,7 +53,35 @@ const MagicScriptTag = () => {
   return <script dangerouslySetInnerHTML={{ __html: calledFunction }} />;
 };
 
-export const onRenderBody = ({ setPreBodyComponents }) => {
+/**
+ * If the user has JS disabled, the injected script will never fire!
+ * This means that they won't have any colors set, everything will be default
+ * black and white.
+ * We can solve for this by injecting a `<style>` tag into the head of the
+ * document, which sets default values for all of our colors.
+ * Only light mode will be available for users with JS disabled.
+ */
+const FallbackStyles = () => {
+  // Create a string holding each CSS variable:
+  /*
+    `--color-text: black;
+    --color-background: white;`
+  */
+
+  const cssVariableString = Object.entries(COLORS).reduce(
+    (acc, [name, colorByTheme]) => {
+      return `${acc}\n--color-${name}: ${colorByTheme.light};`;
+    },
+    ''
+  );
+
+  const wrappedInSelector = `html { ${cssVariableString} }`;
+
+  return <style>{wrappedInSelector}</style>;
+};
+
+export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
+  setHeadComponents(<FallbackStyles />);
   setPreBodyComponents(<MagicScriptTag />);
 };
 
