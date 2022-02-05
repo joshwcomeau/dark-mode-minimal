@@ -6,7 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.7",
-    "gatsby": "^2.20.12",
+    "gatsby": "3",
     "gatsby-plugin-styled-components": "^3.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
