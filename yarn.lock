@@ -5166,12 +5166,12 @@ gatsby-plugin-page-creator@^3.14.0:
     globby "^11.0.4"
     lodash "^4.17.21"
 
-gatsby-plugin-styled-components@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-3.2.1.tgz#de37983e1c72376f8800b8535f2edb033fd9449f"
-  integrity sha512-JYvKkO/PRWhoha9QeN0f4IUqINUNCWyAuzB+UzxOG2Ef0pD5omi8sFgtSBawiZjOwFMFvxp7vCiEf7N4K3BP7Q==
+gatsby-plugin-styled-components@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-5.6.0.tgz#adbb6bb964d33c604831e247aac3af3a5ce8d699"
+  integrity sha512-D/LmioFAA0l6fe3+q0/Y6zj7i9TAJBWhFq3htHHIP8kGbK1gUlRMqLXjdHVo7aYnKqHb76X7kHyjoyYfD2s3aA==
   dependencies:
-    "@babel/runtime" "^7.8.7"
+    "@babel/runtime" "^7.15.4"
 
 gatsby-plugin-typescript@^3.14.0:
   version "3.14.0"
