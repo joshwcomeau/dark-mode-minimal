@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "babel-plugin-styled-components": "^1.10.7",
+    "babel-plugin-styled-components": "2.0.2",
     "gatsby": "3",
     "gatsby-plugin-styled-components": "5.6.0",
     "prop-types": "^15.7.2",
